@@ -11,11 +11,6 @@ public class Player : MonoBehaviour {
         _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update() {
-        
-    }
-
     void FixedUpdate()
     {
         float input = Input.GetAxisRaw("Horizontal");
