@@ -15,7 +15,7 @@ public class Ball : MonoBehaviour {
     }
 
     void LaunchBall() {
-        float launchForce = 600f;
+        float launchForce = 800f;
         Vector2 direction = new Vector2(Random.Range(-1f, 1f), 1f).normalized;
         
         _rigidbody2D.AddForce(direction * launchForce);
