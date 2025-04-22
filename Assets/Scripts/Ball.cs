@@ -2,9 +2,7 @@ using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class Ball : MonoBehaviour
-{
-    float _launchForce = 600f;
+public class Ball : MonoBehaviour {
     Rigidbody2D _rigidbody2D;
     AudioSource _audiosSource;
     
@@ -16,15 +14,14 @@ public class Ball : MonoBehaviour
         LaunchBall();
     }
 
-    void LaunchBall()
-    {
+    void LaunchBall() {
+        float launchForce = 600f;
         Vector2 direction = new Vector2(Random.Range(-1f, 1f), 1f).normalized;
         
-        _rigidbody2D.AddForce(direction * _launchForce);
+        _rigidbody2D.AddForce(direction * launchForce);
     }
 
-    void OnCollisionEnter2D(Collision2D other)
-    {
+    void OnCollisionEnter2D(Collision2D other) {
         _audiosSource.Play();
     }
 }
