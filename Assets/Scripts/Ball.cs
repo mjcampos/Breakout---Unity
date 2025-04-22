@@ -3,6 +3,8 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class Ball : MonoBehaviour {
+    [SerializeField] bool isTesting = false;
+    
     Rigidbody2D _rigidbody2D;
     AudioSource _audiosSource;
     
@@ -16,7 +18,7 @@ public class Ball : MonoBehaviour {
 
     void LaunchBall() {
         float launchForce = 800f;
-        Vector2 direction = new Vector2(Random.Range(-1f, 1f), 1f).normalized;
+        Vector2 direction = isTesting ? Vector2.up : new Vector2(Random.Range(-1f, 1f), 1f).normalized;
         
         _rigidbody2D.AddForce(direction * launchForce);
     }
