@@ -6,6 +6,12 @@ public class Brick : MonoBehaviour
     [SerializeField] int points;
     [SerializeField] AudioClip explosionSound;
     [SerializeField] GameObject audioPrefab;
+    
+    Bricks _bricks;
+
+    void Start() {
+        _bricks = GetComponentInParent<Bricks>();
+    }
 
     void OnCollisionEnter2D(Collision2D other) {
         // Instantiate a temporary audio source at the brick's position
@@ -20,6 +26,9 @@ public class Brick : MonoBehaviour
         
         // Pass along points to score manager
         ScoreManager.Instance.SetScore(points);
+        
+        // Let its parent know that it lost a brick
+        _bricks.BrickLost();
         
         // Destroy brick
         Destroy(gameObject);
