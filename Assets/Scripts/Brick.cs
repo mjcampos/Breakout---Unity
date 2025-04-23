@@ -18,6 +18,9 @@ public class Brick : MonoBehaviour
         // Destroy temp object after sound finishes
         Destroy(tempAudio, explosionSound.length);
         
+        // Pass along points to score manager
+        ScoreManager.Instance.SetScore(points);
+        
         // Destroy brick
         Destroy(gameObject);
     }
