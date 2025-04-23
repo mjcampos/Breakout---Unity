@@ -14,19 +14,23 @@ public class CountdownCanvas : MonoBehaviour {
     }
 
     public void StartCountdown() {
+        _countdown = 3;
+        
         StartCoroutine(Countdown());
     }
 
-    IEnumerator Countdown()
-    {
+    IEnumerator Countdown() {
         yield return null;
         
-        do {
-            Debug.Log(_countdown);
+        while (_countdown > 0) {
             countdownText.text = _countdown.ToString();
             yield return new WaitForSeconds(1f);
             _countdown--;
-        } while (_countdown > -1);
+        }
+        
+        countdownText.text = _countdown.ToString();
+        
+        yield return new WaitForSeconds(0.5f);
         
         countdownText.text = "";
         

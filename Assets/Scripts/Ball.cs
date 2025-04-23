@@ -16,10 +16,10 @@ public class Ball : MonoBehaviour {
         
         _startingPosition = Vector2.zero;
         
-        GameFirstLoaded();
+        ResetBall();
     }
 
-    public void GameFirstLoaded() {
+    public void ResetBall() {
         // Set position to starting point
         transform.position = _startingPosition;
         

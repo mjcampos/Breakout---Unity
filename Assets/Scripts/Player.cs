@@ -16,10 +16,10 @@ public class Player : MonoBehaviour {
 
         _startingPosition = new Vector2(0, -15f);
         
-        GameFirstLoaded();
+        ResetPlayer();
     }
 
-    public void GameFirstLoaded() {
+    public void ResetPlayer() {
         // Set pause to true to keep paddle from moving
         _isPaused = true;
         
@@ -27,9 +27,9 @@ public class Player : MonoBehaviour {
         transform.position = _startingPosition;
     }
 
-    public void Unfreeze()
+    public void PausePlayer(bool paused)
     {
-        _isPaused = false;
+        _isPaused = paused;
     }
 
     void OnMove(InputValue inputValue) {

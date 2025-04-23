@@ -37,12 +37,12 @@ public class GameManager : MonoBehaviour {
         // Step 1
         if (_ball)
         {
-            _ball.GameFirstLoaded();
+            _ball.ResetBall();
         }
 
         if (_player)
         {
-            _player.GameFirstLoaded();
+            _player.ResetPlayer();
         }
         
         // Step 2
@@ -58,7 +58,33 @@ public class GameManager : MonoBehaviour {
         // Unfreeze ball
         _ball.Unfreeze();
         
-        // Unfreeze player
-        _player.Unfreeze();
+        // Unpause player
+        _player.PausePlayer(false);
+    }
+
+    /*
+     * When the ball hits the dead zone it is no longer playable and we need to reset its location
+     * Perform the following steps in order:
+     * 1. Pause game
+     *      a. Pause the player movement and reset player to starting position
+     *      b. Reset ball's position to starting point and stop its movement
+     * 2. Start countdown
+     * 3. Let player move
+     * 4. Launch ball
+     */
+    public void BallHitsDeadZone() {
+        // Step 1 - a
+        _player.ResetPlayer();
+        
+        // Step 1 - b
+        _ball.ResetBall();
+        
+        // Step 2
+        _countdownCanvas.StartCountdown();
+        
+        /*
+         * Step 3 - 4 : Performed in CountdownEnded,
+         *  which is called in the countdown canvas at the end of the countdown
+         */
     }
 }
