@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,9 +28,14 @@ public class Bricks : MonoBehaviour {
 
     public void BrickLost() {
         _numberOfBricks--;
-
+        
         if (_numberOfBricks <= 0) {
-            Debug.Log("Game Over. You won!");
+            StartCoroutine(NotifyPlayerHasWon());
         }
+    }
+
+    IEnumerator NotifyPlayerHasWon() {
+        yield return new WaitForSeconds(0.5f);
+        GameManager.Instance.PlayerWonGame();
     }
 }

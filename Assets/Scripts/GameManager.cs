@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
     public static GameManager Instance { get; private set; }
@@ -7,6 +8,8 @@ public class GameManager : MonoBehaviour {
     Ball _ball;
     Player _player;
     CountdownCanvas _countdownCanvas;
+    GameWonCanvas _gameWonCanvas;
+    bool _playerHasRestartOption = false;
 
     void Awake()
     {
@@ -33,6 +36,7 @@ public class GameManager : MonoBehaviour {
         _ball = FindFirstObjectByType<Ball>();
         _player = FindFirstObjectByType<Player>();
         _countdownCanvas = FindFirstObjectByType<CountdownCanvas>();
+        _gameWonCanvas = FindFirstObjectByType<GameWonCanvas>();
         
         // Step 1
         if (_ball)
@@ -47,6 +51,17 @@ public class GameManager : MonoBehaviour {
         
         // Step 2
         _countdownCanvas.StartCountdown();
+    }
+
+    void Update()
+    {
+        if (_playerHasRestartOption)
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+        }
     }
 
     // Step 3
@@ -86,5 +101,27 @@ public class GameManager : MonoBehaviour {
          * Step 3 - 4 : Performed in CountdownEnded,
          *  which is called in the countdown canvas at the end of the countdown
          */
+    }
+
+    public void PlayerWonGame() {
+        /*
+         * If number of bricks reaches 0 perform the following sequence:
+         * 1. Freeze player
+         * 2. Freeze ball
+         * 3. Notify user that they won
+         * 4. Give them the chance to restart the game
+         */
+        
+        // Step 1
+        _player.PausePlayer(true);
+        
+        // Step 2
+        _ball.Freeze();
+        
+        // Step 3
+        _gameWonCanvas.ShowGameWonText();
+        
+        // Step 4
+        _playerHasRestartOption = true;
     }
 }

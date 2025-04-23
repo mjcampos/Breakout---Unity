@@ -34,6 +34,11 @@ public class Ball : MonoBehaviour {
         LaunchBall();
     }
 
+    public void Freeze()
+    {
+        _rigidbody2D.linearVelocity = Vector2.zero;
+    }
+
     void LaunchBall() {
         float launchForce = 800f;
         Vector2 direction = isTesting ? Vector2.up : new Vector2(Random.Range(-1f, 1f), 1f).normalized;
