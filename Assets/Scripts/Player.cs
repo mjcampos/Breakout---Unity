@@ -10,6 +10,7 @@ public class Player : MonoBehaviour {
     float _moveInput;
     bool _isPaused = true;
     Vector2 _startingPosition;
+    int _damageTrigger = Animator.StringToHash("Damage");
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
@@ -48,6 +49,6 @@ public class Player : MonoBehaviour {
 
     public void ShrinkPlayer()
     {
-        _animator.SetTrigger("Damage");
+        _animator.SetTrigger(_damageTrigger);
     }
 }
