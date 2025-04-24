@@ -343,11 +343,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a260ed4c55944b441afef90411695d07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &46674951 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3875721373060557551, guid: 69ec039e40ce70c4e9151b89fc5bf336, type: 3}
-  m_PrefabInstance: {fileID: 1536638655}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &48099429
 GameObject:
   m_ObjectHideFlags: 0
@@ -1302,11 +1297,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameLostText: {fileID: 694323840}
---- !u!1 &283848793 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3875721373060557551, guid: 69ec039e40ce70c4e9151b89fc5bf336, type: 3}
-  m_PrefabInstance: {fileID: 229403184}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &292278446
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1948,6 +1938,7 @@ GameObject:
   - component: {fileID: 389249324}
   - component: {fileID: 389249323}
   - component: {fileID: 389249325}
+  - component: {fileID: 389249326}
   m_Layer: 0
   m_Name: Roof
   m_TagString: Untagged
@@ -2071,6 +2062,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &389249326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389249322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 559673f30517b8c469fce4689e6e6442, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &396399027
 GameObject:
   m_ObjectHideFlags: 0
@@ -4856,6 +4859,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8845791960195297453, guid: 69ec039e40ce70c4e9151b89fc5bf336, type: 3}
   m_PrefabInstance: {fileID: 1098703174}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1172554964 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3875721373060557551, guid: 69ec039e40ce70c4e9151b89fc5bf336, type: 3}
+  m_PrefabInstance: {fileID: 2004549352}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1194817634
 GameObject:
   m_ObjectHideFlags: 0
@@ -4871,6 +4879,7 @@ GameObject:
   - component: {fileID: 1194817642}
   - component: {fileID: 1194817640}
   - component: {fileID: 1194817641}
+  - component: {fileID: 1194817643}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -5076,6 +5085,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a165b8ba948463408cdd45f0ad5dc2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1194817643
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194817634}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a583edcb5cdc7c943bb55f1dc43befef, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1211327723
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7732,10 +7763,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4fdda05495b8144fab261e501cdbcb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTesting: 0
+  isTesting: 1
   testBricks:
-  - {fileID: 46674951}
-  - {fileID: 283848793}
+  - {fileID: 1172554964}
 --- !u!1001 &1809244967
 PrefabInstance:
   m_ObjectHideFlags: 0

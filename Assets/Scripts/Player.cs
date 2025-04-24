@@ -6,6 +6,7 @@ public class Player : MonoBehaviour {
     [SerializeField] float moveSpeed = 25f;
 
     Rigidbody2D _rigidbody2D;
+    Animator _animator;
     float _moveInput;
     bool _isPaused = true;
     Vector2 _startingPosition;
@@ -13,6 +14,7 @@ public class Player : MonoBehaviour {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
 
         _startingPosition = new Vector2(0, -15f);
         
@@ -42,5 +44,10 @@ public class Player : MonoBehaviour {
         Vector2 velocity = direction * moveSpeed;
         
         _rigidbody2D.linearVelocity = _isPaused ? Vector2.zero : velocity;
+    }
+
+    public void ShrinkPlayer()
+    {
+        _animator.SetTrigger("Damage");
     }
 }

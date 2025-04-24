@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour {
     HeartsCanvas _heartsCanvas;
     
     bool _playerHasRestartOption = false;
+    bool _playerHasBeenShrunk = false;
 
     void Awake()
     {
@@ -173,5 +174,12 @@ public class GameManager : MonoBehaviour {
         
         // Step 4
         _playerHasRestartOption = true;
+    }
+
+    public void ShrinkPlayer() {
+        if (!_playerHasBeenShrunk) {
+            _player.ShrinkPlayer();
+            _playerHasBeenShrunk = true;
+        }
     }
 }
