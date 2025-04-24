@@ -31,6 +31,11 @@ public class AudioManager : MonoBehaviour {
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if (!_audioSource)
+        {
+            return;
+        }
+        
         foreach (string sceneName in scenesToStopMusic)
         {
             if (scene.name == sceneName)
