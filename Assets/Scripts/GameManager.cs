@@ -7,8 +7,12 @@ public class GameManager : MonoBehaviour {
     
     Ball _ball;
     Player _player;
+    Lives _lives;
     CountdownCanvas _countdownCanvas;
     GameWonCanvas _gameWonCanvas;
+    GameLostCanvas _gameLostCanvas;
+    HeartsCanvas _heartsCanvas;
+    
     bool _playerHasRestartOption = false;
 
     void Awake()
@@ -26,6 +30,8 @@ public class GameManager : MonoBehaviour {
     /*
      * When the game begins perform the following steps:
      * 1. Freeze player and ball. It most likely is already frozen but won't hurt to double check
+     *      a. Reset lives to 3
+     *      b. Reset display of hearts in hearts container
      * 2. Initiate countdown
      * 3. Wait for countdown to complete
      * 4. Unfreeze player and ball
@@ -37,6 +43,9 @@ public class GameManager : MonoBehaviour {
         _player = FindFirstObjectByType<Player>();
         _countdownCanvas = FindFirstObjectByType<CountdownCanvas>();
         _gameWonCanvas = FindFirstObjectByType<GameWonCanvas>();
+        _gameLostCanvas = FindFirstObjectByType<GameLostCanvas>();
+        _lives = FindFirstObjectByType<Lives>();
+        _heartsCanvas = FindFirstObjectByType<HeartsCanvas>();
         
         // Step 1
         if (_ball)
@@ -47,6 +56,18 @@ public class GameManager : MonoBehaviour {
         if (_player)
         {
             _player.ResetPlayer();
+        }
+
+        // Step 1 - a
+        if (_lives)
+        {
+            _lives.ResetLives();
+        }
+
+        // Step 1 - b
+        if (_heartsCanvas)
+        {
+            _heartsCanvas.ResetHearts();
         }
         
         // Step 2
@@ -83,9 +104,17 @@ public class GameManager : MonoBehaviour {
      * 1. Pause game
      *      a. Pause the player movement and reset player to starting position
      *      b. Reset ball's position to starting point and stop its movement
-     * 2. Start countdown
-     * 3. Let player move
-     * 4. Launch ball
+     * 2. Deduct a life from the player
+     *      a. Notify Hearts Canvas to remove heart from scene
+     *      b. Get if player is still alive
+     *      c. Determine if player is still alive
+     * 3. If player still alive:
+     *      a. Start countdown
+     *      b. Let player move
+     *      c. Launch ball
+     * 4. If player is dead:
+     *      a. Display game over
+     *      b. Give player option to restart game
      */
     public void BallHitsDeadZone() {
         // Step 1 - a
@@ -95,12 +124,33 @@ public class GameManager : MonoBehaviour {
         _ball.ResetBall();
         
         // Step 2
-        _countdownCanvas.StartCountdown();
+        _lives.RemoveLife();
         
-        /*
-         * Step 3 - 4 : Performed in CountdownEnded,
-         *  which is called in the countdown canvas at the end of the countdown
-         */
+        // Step 2 - a
+        _heartsCanvas.RemoveHeart();
+        
+        // Step 2 - b
+        bool playerStillAlive = _lives.GetPlayerAlive();
+        
+        // Step 2 - c
+        if (playerStillAlive)
+        {
+            // Step 3 - a
+            _countdownCanvas.StartCountdown();
+            
+            /*
+             * Step 3 b - c : Performed in CountdownEnded,
+             *  which is called in the countdown canvas at the end of the countdown
+             */
+        }
+        else
+        {
+            // Step 4 - a
+            _gameLostCanvas.ShowGameLostText();
+            
+            // Step 4 - b
+            _playerHasRestartOption = true;
+        }
     }
 
     public void PlayerWonGame() {
