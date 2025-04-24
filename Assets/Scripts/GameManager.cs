@@ -84,6 +84,12 @@ public class GameManager : MonoBehaviour {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
         }
+        
+        // Allow the player to press escape to return to main menu
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("Main Menu");
+        }
     }
 
     // Step 3
