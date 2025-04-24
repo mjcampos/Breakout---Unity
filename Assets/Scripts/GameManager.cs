@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour {
     GameWonCanvas _gameWonCanvas;
     GameLostCanvas _gameLostCanvas;
     HeartsCanvas _heartsCanvas;
+    HighScoreCanvas _highScoreCanvas;
     
     bool _playerHasRestartOption = false;
     bool _playerHasBeenShrunk = false;
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour {
         _gameLostCanvas = FindFirstObjectByType<GameLostCanvas>();
         _lives = FindFirstObjectByType<Lives>();
         _heartsCanvas = FindFirstObjectByType<HeartsCanvas>();
+        _highScoreCanvas = FindFirstObjectByType<HighScoreCanvas>();
         
         // Step 1
         if (_ball)
@@ -166,7 +168,9 @@ public class GameManager : MonoBehaviour {
          * 1. Freeze player
          * 2. Freeze ball
          * 3. Notify user that they won
-         * 4. Give them the chance to restart the game
+         * 4. Update High Score
+         * 5. Set High Score on text
+         * 6. Give them the chance to restart the game
          */
         
         // Step 1
@@ -179,6 +183,12 @@ public class GameManager : MonoBehaviour {
         _gameWonCanvas.ShowGameWonText();
         
         // Step 4
+        GameDataManager.Instance.SaveHighScore(ScoreManager.Instance.GetScore());
+        
+        // Step 5
+        _highScoreCanvas.UpdateHighScoreText();
+        
+        // Step 6
         _playerHasRestartOption = true;
     }
 

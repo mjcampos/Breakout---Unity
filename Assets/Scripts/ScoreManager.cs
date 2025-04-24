@@ -29,4 +29,9 @@ public class ScoreManager : MonoBehaviour {
         _score += score;
         _scoreCanvas.UpdateScore(_score);
     }
+
+    public int GetScore()
+    {
+        return _score;
+    }
 }

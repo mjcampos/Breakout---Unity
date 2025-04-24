@@ -31,4 +31,9 @@ public class Settings : MonoBehaviour {
     {
         _audioSource.volume = scrollbar.value;
     }
+
+    public void ResetHighScore()
+    {
+        GameDataManager.Instance.ResetHighScore();
+    }
 }
