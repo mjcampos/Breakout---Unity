@@ -1,9 +1,16 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
     public static GameManager Instance { get; private set; }
+    
+    [SerializeField] InputActionAsset inputActions;
+    
+    InputActionMap _playerInputActionMap;
+    InputAction _restartGameAction;
+    InputAction _backToMainMenuAction;
     
     Ball _ball;
     Player _player;
@@ -16,6 +23,8 @@ public class GameManager : MonoBehaviour {
     
     bool _playerHasRestartOption = false;
     bool _playerHasBeenShrunk = false;
+    
+    
 
     void Awake()
     {
@@ -49,6 +58,15 @@ public class GameManager : MonoBehaviour {
         _lives = FindFirstObjectByType<Lives>();
         _heartsCanvas = FindFirstObjectByType<HeartsCanvas>();
         _highScoreCanvas = FindFirstObjectByType<HighScoreCanvas>();
+        _playerInputActionMap = inputActions.FindActionMap("Player");
+        
+        /*
+         * We need two player input actions:
+         * 1. Restart
+         * 2. Back
+         */
+        _restartGameAction = _playerInputActionMap.FindAction("Restart");
+        _backToMainMenuAction = _playerInputActionMap.FindAction("Back");
         
         // Step 1
         if (_ball)
@@ -81,14 +99,14 @@ public class GameManager : MonoBehaviour {
     {
         if (_playerHasRestartOption)
         {
-            if (Input.GetKeyDown(KeyCode.R))
+            if (_restartGameAction.IsPressed())
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
         }
         
         // Allow the player to press escape to return to main menu
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (_backToMainMenuAction.IsPressed())
         {
             SceneManager.LoadScene("Main Menu");
         }
