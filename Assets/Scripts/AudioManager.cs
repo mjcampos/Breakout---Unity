@@ -5,7 +5,12 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoBehaviour {
     public static AudioManager Instance;
-    public float Volume { get; private set; }
+
+    public float Volume
+    {
+        get => _audioSource.volume;
+        set => _audioSource.volume = value;
+    }
     
     AudioSource _audioSource;
 
@@ -26,11 +31,5 @@ public class AudioManager : MonoBehaviour {
         _audioSource = GetComponent<AudioSource>();
         
         Volume = _audioSource.volume;
-    }
-
-    public void SetVolume(float volume)
-    {
-        Volume = volume;
-        _audioSource.volume = volume;
     }
 }

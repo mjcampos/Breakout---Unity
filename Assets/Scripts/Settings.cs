@@ -18,7 +18,7 @@ public class Settings : MonoBehaviour {
 
     public void AdjustVolume()
     {
-        AudioManager.Instance.SetVolume(scrollbar.value);
+        AudioManager.Instance.Volume = scrollbar.value;
     }
 
     public void ResetHighScore()
