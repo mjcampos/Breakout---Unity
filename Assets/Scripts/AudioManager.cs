@@ -2,11 +2,10 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoBehaviour {
     public static AudioManager Instance;
-    
-    [SerializeField] string[] scenesToStopMusic;
-    
+    public float Volume { get; private set; }
     
     AudioSource _audioSource;
 
@@ -20,39 +19,18 @@ public class AudioManager : MonoBehaviour {
         
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        
-        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (!_audioSource)
-        {
-            return;
-        }
         
-        foreach (string sceneName in scenesToStopMusic)
-        {
-            if (scene.name == sceneName)
-            {
-                _audioSource.Stop();
-                return;
-            }
-        }
-
-        if (!_audioSource.isPlaying)
-        {
-            _audioSource.Play();
-        }
+        Volume = _audioSource.volume;
     }
 
-    void OnDestroy()
+    public void SetVolume(float volume)
     {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
+        Volume = volume;
+        _audioSource.volume = volume;
     }
 }

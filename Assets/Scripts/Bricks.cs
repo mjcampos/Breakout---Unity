@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Bricks : MonoBehaviour {
+    [Header("Setup For Testing")]
     [SerializeField] bool isTesting = false;
     [SerializeField] List<GameObject> testBricks = new List<GameObject>();
+    
+    [Header("Audio Setup")]
+    [SerializeField] AudioClip explosionSound;
     
     int _numberOfBricks;
     
@@ -26,9 +30,14 @@ public class Bricks : MonoBehaviour {
         }
     }
 
-    public void BrickLost() {
+    public void BrickLost(Vector2 brickPos) {
+        // Play explosion sound
+        AudioSource.PlayClipAtPoint(explosionSound, brickPos);
+        
+        // Deduct brick from tracker
         _numberOfBricks--;
         
+        // If there are no bricks left the player has won
         if (_numberOfBricks <= 0) {
             StartCoroutine(NotifyPlayerHasWon());
         }

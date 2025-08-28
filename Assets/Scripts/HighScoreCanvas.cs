@@ -12,6 +12,6 @@ public class HighScoreCanvas : MonoBehaviour {
 
     public void UpdateHighScoreText()
     {
-        highScoreText.text = "High Score: " + GameDataManager.Instance.GetHighScore().ToString();
+        highScoreText.text = "High Score: " + GameDataManager.Instance.GetHighScore();
     }
 }

@@ -5,21 +5,10 @@ using UnityEngine.UI;
 
 public class Settings : MonoBehaviour {
     [SerializeField] Scrollbar scrollbar;
-    
-    AudioManager _audioManager;
-    AudioSource _audioSource;
 
     void Start()
     {
-        _audioManager = FindFirstObjectByType<AudioManager>();
-
-        scrollbar.interactable = _audioManager;
-
-        if (_audioManager)
-        {
-            _audioSource = _audioManager.GetComponent<AudioSource>();
-            scrollbar.value = _audioSource.volume;
-        }
+        scrollbar.value = AudioManager.Instance.Volume;
     }
 
     public void GoToMainMenu()
@@ -29,7 +18,7 @@ public class Settings : MonoBehaviour {
 
     public void AdjustVolume()
     {
-        _audioSource.volume = scrollbar.value;
+        AudioManager.Instance.SetVolume(scrollbar.value);
     }
 
     public void ResetHighScore()
